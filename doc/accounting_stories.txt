@@ -1,0 +1,84 @@
+accounting system stories
+
+
+As a family member
+I want the site to require login
+So my financial data isn't public.
+
+As an administrator
+I want to set up accounts
+So I can keep track of money that is in real accounts.
+
+As an administrator
+I want to set the initial balance of an account
+So reconciling with real account balances is possible.
+
+As a family member
+I want my own account
+So the system can be personalized for me.
+
+As a family member
+I want accounts to have names
+So I will know which account is which easily.
+
+As an administrator
+I want to mark an account as inactive
+So that old accounts don't confuse data management.
+
+As a family member
+I don't want to see inactive accounts when dealing with current information
+So that information is more clear.
+
+As a family member
+I want to enter payments
+So I can track my finances.
+
+As a family member
+I want to enter the account associated with a payment
+So that I can keep track of account balances.
+
+As a family member
+I want to have a default account
+to save time when entering payments.
+
+As a family member
+I want to enter the time when I made a payment
+So I can know that the payment was made.
+
+As a family member
+I want to enter the time when a payment should take effect
+So I can accurately track "online bill payments" impact on my balances.
+
+As a family member
+I want to enter when a payment actually occurred
+So I can accurately track my account balance.
+
+As a family member
+I want to see which payments are not yet reconciled
+So that I can find payments which are still outstanding.
+
+As a family member
+I want to see my account balance
+So that I know the current amount of money in a real account.
+
+As a family member
+I want to see my available account balance
+So that I don't mistakenly spend money that I don't really have.
+
+As a family member
+I want to see projected balances into the future
+So that my accounts don't get overdrawn by planned payments.
+
+As a family member
+I want to have periodic payments
+So that I don't forget to account for automated payments.
+
+As a family member
+I want payments to be associated with family members
+So that I can more readily sort and analyze payments.
+
+As a family member
+I want payments that I enter to be associated with me
+So that I don't have to enter redundant information.
+
+
