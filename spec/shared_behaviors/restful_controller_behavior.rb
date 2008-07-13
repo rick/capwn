@@ -241,7 +241,7 @@ shared_examples_for 'a RESTful controller with an update action' do
   describe "handling PUT /plural/1 (update)" do
     before(:each) do
       @obj_id = '1'
-      @obj = stub(@model_name, :to_s => @obj_id)
+      @obj = stub(@model_name, :to_s => @obj_id, :attributes= => true, :save => true)
       @model_class.stubs(:find).returns(@obj)
       do_login if needs_login?
       
@@ -250,12 +250,12 @@ shared_examples_for 'a RESTful controller with an update action' do
     end
   
     def put_with_successful_update
-      @obj.expects(:update_attributes).returns(true)
+      @obj.expects(:save).returns(true)
       put :update, { :id => @obj_id }.merge(nesting_params)
     end
   
     def put_with_failed_update
-      @obj.expects(:update_attributes).returns(false)
+      @obj.expects(:save).returns(false)
       put :update, { :id => @obj_id }.merge(nesting_params)
     end
   
