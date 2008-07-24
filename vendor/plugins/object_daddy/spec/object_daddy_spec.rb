@@ -445,7 +445,7 @@ if File.exists?("#{File.dirname(__FILE__)}/../../../../config/environment.rb")
     end
     
     it "should base the exemplar path off RAILS_ROOT for ActiveRecord models" do
-      Frobnitz.exemplar_path.should == File.join(RAILS_ROOT, 'test', 'exemplars')
+      Frobnitz.exemplar_path.should == File.join(RAILS_ROOT, 'spec', 'exemplars')
     end
     
     it "should generate instances of any belongs_to associations which are required by a presence_of validator for the association name" do
