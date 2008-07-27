@@ -1,0 +1,6 @@
+- form_for @category do |f|
+  - unless flash[:notice].blank?
+    .error
+      = flash[:notice]
+  = f.text_field :name
+  = f.submit

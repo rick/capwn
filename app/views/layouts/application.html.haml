@@ -8,10 +8,5 @@
     .menu
       %ul
         %li= link_to 'Categories', categories_path
-    .errors
-      %ul
-        %li 
-          This is an error
-          %a{:href=>"http://asdfdsfadasfd"} This is an error link!
-          
-    = yield
+    .content
+      = yield

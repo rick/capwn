@@ -14,6 +14,13 @@ describe Category do
     it 'should be valid if it has a name' do
       Category.new(:name => 'foo').should be_valid
     end
+    
+    it 'should require names to be unique' do
+      category = Category.generate!
+      dup = Category.new(:name => category.name)
+      dup.should_not be_valid
+      dup.should have(1).errors_on(:name)
+    end
   end
   
   describe 'attributes' do
