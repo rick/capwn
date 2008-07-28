@@ -1,6 +1,38 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe "Making a purchase from a cash account" do
+  before :each do
+    @user = User.generate!
+    @cash = Account.generate!
+    @groceries = Account.generate!
+  end
+  
+  it 'should require a payment date'
+  it 'should require a transaction party'
+  it 'should require a cash account entry'
+  
+  describe 'the cash account entry' do
+    it 'should require the cash account'
+    it 'should require an amount'
+  end
+  
+  it 'should require a tagged account entry'
+  
+  describe 'the tagged account entry' do
+    it 'should require the tagged account'
+    it 'should require an amount'
+  end
+  
+  it 'should require the transaction to balance'
+
+  it 'should succeed if all necessary information is provided' do
+    @transaction = Transaction.create!(
+      :paid_at => Time.now,
+      :user => @user)
+    
+    @transaction.entries.create!(:account => @cash, :amount => 24)
+    @transaction.entries.create!(:account => @groceries, :amount => -24)
+  end
 
   describe "and reconciling" do
     it "should not attempt to reconcile against the cash account"
