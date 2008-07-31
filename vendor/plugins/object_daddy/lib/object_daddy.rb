@@ -21,7 +21,7 @@ module ObjectDaddy
     def spawn(args = {})
       gather_exemplars
       (generators || {}).each_pair do |handle, gen_data|
-        next if args[handle]
+        next if args.include?(handle)
         generator = gen_data[:generator]
         if generator[:block]
           if generator[:start]
@@ -36,9 +36,9 @@ module ObjectDaddy
           args[handle] = generator[:class].next
         end
       end
-      if presence_validated_attributes
+      if presence_validated_attributes and !presence_validated_attributes.empty?
         req = {}
-        (@presence_validated_attributes.keys - args.keys).each {|a| req[a.to_s] = true } # find attributes required by validates_presence_of not already set
+        (presence_validated_attributes.keys - args.keys).each {|a| req[a.to_s] = true } # find attributes required by validates_presence_of not already set
         
         belongs_to_associations = reflect_on_all_associations(:belongs_to).to_a
         missing = belongs_to_associations.select { |a|  req[a.name.to_s] or req[a.primary_key_name.to_s] }
@@ -76,7 +76,6 @@ module ObjectDaddy
       end
       
       if args[:method]
-        raise ArgumentError, "generator method :[#{args[:method]}] is not known" unless respond_to?(args[:method].to_sym)
         record_generator_for(handle, :method => args[:method].to_sym)
       elsif args[:class]
         raise ArgumentError, "generator class [#{args[:class].name}] does not have a :next method" unless args[:class].respond_to?(:next)
@@ -102,7 +101,16 @@ module ObjectDaddy
       load(path) if File.exists?(path)
       self.exemplars_generated = true
     end
-  
+    
+    def presence_validated_attributes
+      @presence_validated_attributes ||= {}
+      attrs = @presence_validated_attributes
+      if superclass.respond_to?(:presence_validated_attributes)
+        attrs = superclass.presence_validated_attributes.merge(attrs)
+      end
+      attrs
+    end
+    
   protected
   
     # we define an underscore helper ourselves since the ActiveSupport isn't available if we're not using Rails
@@ -119,7 +127,8 @@ module ObjectDaddy
   
   module RailsClassMethods
     def exemplar_path
-      File.join(RAILS_ROOT, 'spec', 'exemplars')
+      dir = File.directory?(File.join(RAILS_ROOT, 'spec')) ? 'spec' : 'test'
+      File.join(RAILS_ROOT, dir, 'exemplars')
     end
     
     def validates_presence_of_with_object_daddy(*attr_names)
