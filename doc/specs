@@ -1,0 +1,39 @@
+........PPPPP.PPPPPPPPPPPPPPPPPPPPPPPPPPP.............
+
+Pending:
+Making a purchase from a cash account should require a payment date (Not Yet Implemented)
+Making a purchase from a cash account should require a transaction party (Not Yet Implemented)
+Making a purchase from a cash account should require a cash account entry (Not Yet Implemented)
+Making a purchase from a cash account should require a tagged account entry (Not Yet Implemented)
+Making a purchase from a cash account should require the transaction to balance (Not Yet Implemented)
+Making a purchase from a cash account the cash account entry should require the cash account (Not Yet Implemented)
+Making a purchase from a cash account the cash account entry should require an amount (Not Yet Implemented)
+Making a purchase from a cash account the tagged account entry should require the tagged account (Not Yet Implemented)
+Making a purchase from a cash account the tagged account entry should require an amount (Not Yet Implemented)
+Making a purchase from a cash account and reconciling should not attempt to reconcile against the cash account (Not Yet Implemented)
+Making a purchase from a checking account to a merchant via check card and reconciling should be able to reconcile against the checking account entry (Not Yet Implemented)
+Making a purchase from a checking acocunt to a merchant via check should allow entering a check number (Not Yet Implemented)
+Making a purchase from a checking acocunt to a merchant via check and reconciling should be able to reconcile against the check entry (Not Yet Implemented)
+Making an ATM withdrawal from a checking account should require a checking account entry (Not Yet Implemented)
+Making an ATM withdrawal from a checking account should require a cash account entry (Not Yet Implemented)
+Making an ATM withdrawal from a checking account and reconciling should be able to reconcile against the check entry (Not Yet Implemented)
+Making an ATM withdrawal from a checking account and reconciling should not attempt to reconcile against the cash account entry (Not Yet Implemented)
+Making an ATM withdrawal from a checking account with ATM fees should allow a bank fee entry (Not Yet Implemented)
+Making an ATM withdrawal from a checking account with ATM fees should allow an ATM fee entry (foreign bank) (Not Yet Implemented)
+Making an ATM withdrawal from a checking account with ATM fees and reconciling should be able to reconcile against any bank fee entry (Not Yet Implemented)
+Making an ATM withdrawal from a checking account with ATM fees and reconciling should be able to reconcile against any ATM fee entry (Not Yet Implemented)
+Making an ATM withdrawal during a purchase from a checking account should require a checking account entry for the ATM withdrawal (Not Yet Implemented)
+Making an ATM withdrawal during a purchase from a checking account should require a cash account entry (Not Yet Implemented)
+Making an ATM withdrawal during a purchase from a checking account should require a checking account entry for the purchase (Not Yet Implemented)
+Making an ATM withdrawal during a purchase from a checking account and reconciling should be able to reconcile against the sum of the checking account entry and the ATM withdrawal (Not Yet Implemented)
+Making an ATM withdrawal during a purchase from a checking account and reconciling should be able to reconcile against any bank fee entry (Not Yet Implemented)
+Making an ATM withdrawal during a purchase from a checking account and reconciling should be able to reconcile against any ATM fee entry (Not Yet Implemented)
+Making an ATM withdrawal during a purchase from a checking account and reconciling should not attempt to reconcile against the cash account entry (Not Yet Implemented)
+A bank charges a fee against an account when reconciling should find no match in the account's entries (Not Yet Implemented)
+Paying a bill via online bill payment should allow entering an entry date (Not Yet Implemented)
+Paying a bill via online bill payment should allow entering a payment date (Not Yet Implemented)
+Paying a bill via online bill payment and reconciling should reconcile against the payment transaction (Not Yet Implemented)
+
+Finished in 1.015054 seconds
+
+54 examples, 0 failures, 32 pending
