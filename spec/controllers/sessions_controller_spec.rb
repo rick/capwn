@@ -14,13 +14,13 @@ describe SessionsController do
       session[:user_id].should_not be_nil      
     end
 
-    it 'should redirect to original url if one is available' do
+    it 'should redirect to return_to url if available' do
       session[:return_to] = '/foo/bar'
       post :create, { :login => @user.login, :password => @user.password }
       response.should redirect_to('/foo/bar')
     end
 
-    it 'should redirect to previous location if no original url is available' do
+    it 'should redirect to root url if no return_to url is available ' do
       post :create, { :login => @user.login, :password => @user.password }
       response.should redirect_to('/')
     end
