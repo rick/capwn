@@ -40,7 +40,7 @@ describe UsersController do
       create_user
     end
     it "should set an error message" do
-      flash[:error].should_not be_nil
+      flash[:error].should include("We couldn't set up that account, sorry.")
     end
     it "should re-render new template" do
       response.should render_template(:new)
