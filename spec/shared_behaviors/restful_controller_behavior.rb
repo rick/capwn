@@ -1,3 +1,5 @@
+include AuthenticatedTestHelper
+
 shared_examples_for 'a RESTful controller with an index action' do
   before :each do
     path_name_setup
@@ -442,24 +444,199 @@ shared_examples_for 'a controller with login restrictions' do
 end
 
 
-shared_examples_for 'a RESTful controller requiring login' do  
-  def do_login
-    login_as Login.find(:first)
+shared_examples_for 'a RESTful controller with an index action requiring login' do
+  def needs_login?
+    true
   end
-  
+
+  describe do
+    it_should_behave_like 'a RESTful controller with an index action'
+  end
+
+  describe 'handling GET /plural (index) when not logged in' do
+    before :each do
+      controller.stubs(:authorized?).returns(false)    
+      request.stubs(:request_uri).returns('fake_address')
+      get :index
+    end
+    it 'should not be accessible' do
+      response.should redirect_to(new_session_path)
+    end
+    it 'should save the requested URL' do
+      session[:return_to].should == 'fake_address'
+    end
+  end
+end
+
+shared_examples_for 'a RESTful controller with a show action requiring login' do
+  def needs_login?
+    true
+  end
+
+  describe do
+    it_should_behave_like 'a RESTful controller with an show action'
+  end
+
+  describe 'handling GET /plural/1 (show) when not logged in' do
+    before :each do
+      controller.stubs(:authorized?).returns(false)    
+      request.stubs(:request_uri).returns('fake_address')
+      get :show, :id => "1"    
+    end
+    it 'should not be accessible' do
+      response.should redirect_to(new_session_path)
+    end
+    it 'should save the requested URL' do
+      session[:return_to].should == 'fake_address'
+    end
+  end
+end
+
+shared_examples_for 'a RESTful controller with a new action requiring login' do
+  def needs_login?
+    true
+  end
+
+  describe do
+    it_should_behave_like 'a RESTful controller with an new action'
+  end
+
+  describe 'handling GET /plural/new when not logged in' do
+    before :each do
+      controller.stubs(:authorized?).returns(false)    
+      request.stubs(:request_uri).returns('fake_address')
+      get :new
+    end
+    it 'should not be accessible' do
+      response.should redirect_to(new_session_path)
+    end
+    it 'should save the requested URL' do
+      session[:return_to].should == 'fake_address'
+    end
+  end
+end
+
+shared_examples_for 'a RESTful controller with a create action requiring login' do
+  def needs_login?
+    true
+  end
+
+  describe do
+    it_should_behave_like 'a RESTful controller with an create action'
+  end
+
+  describe 'handling POST /plural (create) when not logged in' do
+    before :each do
+      controller.stubs(:authorized?).returns(false)    
+      request.stubs(:request_uri).returns('fake_address')
+      post :create, {}
+    end
+    it 'should not be accessible' do
+      response.should redirect_to(new_session_path)
+    end
+    it 'should save the requested URL' do
+      session[:return_to].should == 'fake_address'
+    end
+  end
+end
+
+shared_examples_for 'a RESTful controller with an edit action requiring login' do
+  def needs_login?
+    true
+  end
+
+  describe do
+    it_should_behave_like 'a RESTful controller with an edit action'
+  end
+
+  describe 'handling GET /plural/1/edit (edit) when not logged in' do
+    before :each do
+      controller.stubs(:authorized?).returns(false)    
+      request.stubs(:request_uri).returns('fake_address')
+      get :edit, :id => 1
+    end
+    it 'should not be accessible' do
+      response.should redirect_to(new_session_path)
+    end
+    it 'should save the requested URL' do
+      session[:return_to].should == 'fake_address'
+    end
+  end
+end
+
+shared_examples_for 'a RESTful controller with an update action requiring login' do
+  def needs_login?
+    true
+  end
+
+  describe do
+    it_should_behave_like 'a RESTful controller with an update action'
+  end
+
+  describe 'handling PUT /plural/1 (update) when not logged in' do
+    before :each do
+      controller.stubs(:authorized?).returns(false)    
+      request.stubs(:request_uri).returns('fake_address')
+      put :update, :id => '1'
+    end
+    it 'should not be accessible' do
+      response.should redirect_to(new_session_path)
+    end
+    it 'should save the requested URL' do
+      session[:return_to].should == 'fake_address'
+    end
+  end
+end
+
+shared_examples_for 'a RESTful controller with a destroy action requiring login' do
+  def needs_login?
+    true
+  end
+
+  describe do
+    it_should_behave_like 'a RESTful controller with an destroy action'
+  end
+
+  describe 'handling DELETE /plural/1 (destroy) when not logged in' do
+    before :each do
+      controller.stubs(:authorized?).returns(false)    
+      request.stubs(:request_uri).returns('fake_address')
+      delete :destroy, :id => '1'
+    end
+    it 'should not be accessible' do
+      response.should redirect_to(new_session_path)
+    end
+    it 'should save the requested URL' do
+      session[:return_to].should == 'fake_address'
+    end
+  end
+end
+
+shared_examples_for 'a RESTful controller requiring login' do  
   def needs_login?
     true
   end
   
-  it_should_behave_like 'a RESTful controller'
-  it_should_behave_like 'a controller with login restrictions'
+  it_should_behave_like 'a RESTful controller with a index action requiring login'
+  it_should_behave_like 'a RESTful controller with a show action requiring login'
+  it_should_behave_like 'a RESTful controller with a new action requiring login'
+  it_should_behave_like 'a RESTful controller with a edit action requiring login'
+  it_should_behave_like 'a RESTful controller with a create action requiring login'
+  it_should_behave_like 'a RESTful controller with a update action requiring login'
+  it_should_behave_like 'a RESTful controller with a delete action requiring login'
 end
 
 
 #### helper methods for various setup or behavior needs
 
 # declare a default predicate for whether we need to bother with login overhead for these examples
-def needs_login?() false end
+def needs_login?() 
+  false 
+end
+
+def do_login
+  login_as User.generate   
+end
 
 unless defined? nesting_params
   def nesting_params
