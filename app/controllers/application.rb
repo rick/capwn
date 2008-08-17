@@ -17,4 +17,11 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password
 
   before_filter :login_required
+
+  def admin_required
+    unless @current_user.isAdmin
+      flash[:notice] = "Only admins can access this functionality"
+      redirect_to root_path
+    end
+  end
 end
