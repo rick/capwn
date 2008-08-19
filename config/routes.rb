@@ -12,5 +12,5 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :categories
 
-  map.root :controller => 'accounts'
+  map.root :controller => 'accounts', :action => 'index', :resource_path => '/accounts'
 end
