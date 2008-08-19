@@ -474,7 +474,7 @@ shared_examples_for 'a RESTful controller with a show action requiring login' do
   end
 
   describe do
-    it_should_behave_like 'a RESTful controller with an show action'
+    it_should_behave_like 'a RESTful controller with a show action'
   end
 
   describe 'handling GET /plural/1 (show) when not logged in' do
@@ -498,7 +498,7 @@ shared_examples_for 'a RESTful controller with a new action requiring login' do
   end
 
   describe do
-    it_should_behave_like 'a RESTful controller with an new action'
+    it_should_behave_like 'a RESTful controller with a new action'
   end
 
   describe 'handling GET /plural/new when not logged in' do
@@ -522,7 +522,7 @@ shared_examples_for 'a RESTful controller with a create action requiring login' 
   end
 
   describe do
-    it_should_behave_like 'a RESTful controller with an create action'
+    it_should_behave_like 'a RESTful controller with a create action'
   end
 
   describe 'handling POST /plural (create) when not logged in' do
@@ -594,7 +594,7 @@ shared_examples_for 'a RESTful controller with a destroy action requiring login'
   end
 
   describe do
-    it_should_behave_like 'a RESTful controller with an destroy action'
+    it_should_behave_like 'a RESTful controller with a destroy action'
   end
 
   describe 'handling DELETE /plural/1 (destroy) when not logged in' do
@@ -617,13 +617,13 @@ shared_examples_for 'a RESTful controller requiring login' do
     true
   end
   
-  it_should_behave_like 'a RESTful controller with a index action requiring login'
+  it_should_behave_like 'a RESTful controller with an index action requiring login'
   it_should_behave_like 'a RESTful controller with a show action requiring login'
   it_should_behave_like 'a RESTful controller with a new action requiring login'
-  it_should_behave_like 'a RESTful controller with a edit action requiring login'
+  it_should_behave_like 'a RESTful controller with an edit action requiring login'
   it_should_behave_like 'a RESTful controller with a create action requiring login'
-  it_should_behave_like 'a RESTful controller with a update action requiring login'
-  it_should_behave_like 'a RESTful controller with a delete action requiring login'
+  it_should_behave_like 'a RESTful controller with an update action requiring login'
+  it_should_behave_like 'a RESTful controller with a destroy action requiring login'
 end
 
 
