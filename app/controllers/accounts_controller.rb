@@ -1,5 +1,3 @@
 class AccountsController < ApplicationController
-  def index
-    @accounts = Account.find(:all)
-  end
+  resources_controller_for :accounts
 end
