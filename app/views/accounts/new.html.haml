@@ -1,0 +1,6 @@
+= error_messages_for :account
+- form_for @account do |f|
+  %p
+    = label :account, :name
+    = f.text_field :name
+  = submit_tag
