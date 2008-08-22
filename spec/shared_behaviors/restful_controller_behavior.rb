@@ -167,7 +167,11 @@ shared_examples_for 'a RESTful controller with a create action' do
       @model_class.stubs(:new).returns(@obj)
       do_login if needs_login?
       
-      object_path_setup
+      if redirects_to_index
+        object_path_setup :plural
+      else
+        object_path_setup
+      end
     end
   
     def post_with_successful_save
@@ -185,7 +189,7 @@ shared_examples_for 'a RESTful controller with a create action' do
       post_with_successful_save
     end
 
-    it "should redirect to the new object on a successful save" do
+    it "should redirect to the new object or objects on a successful save" do
       post_with_successful_save
       response.should redirect_to(self.send("#{@object_path_method}_url".to_sym, *@url_args))
     end
