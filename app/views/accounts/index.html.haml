@@ -3,5 +3,5 @@
 
 - @accounts.each do |account|
   .account{:id => account.id}
-    = link_to account.name, account
+    = link_to account.name, edit_account_path(account)
 
