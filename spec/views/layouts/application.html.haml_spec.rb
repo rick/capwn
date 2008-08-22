@@ -5,8 +5,8 @@ describe 'layouts/application.html' do
     render 'layouts/application.html.haml'
   end
 
-  it 'should have a link to access categories' do
+  it 'should have a link to access accounts' do
     do_render
-    response.should have_tag('a[href=?]', categories_path)
+    response.should have_tag('a[href=?]', accounts_path)
   end
 end
