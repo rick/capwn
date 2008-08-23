@@ -1,102 +1,102 @@
 accounting system stories
 
-ADM001: Create Accounts
+TODO ADM001: Create Accounts
   As an administrator
   I want to set up accounts
   So I can keep track of money that is in real accounts.
 
-ADM011: Create Initial Balance 
+TODO ADM011: Create Initial Balance 
   As an administrator
   I want to set the initial balance of an account
   So reconciling with real account balances is possible.
 
-ADM021: Inactivate Accounts
+TODO ADM021: Inactivate Accounts
   As an administrator
   I want to mark an account as inactive
   So that old accounts don't confuse data management.
 
 
-FAM001: Require login
+TODO FAM001: Require login
   As a family member
   I want the site to require login
   So my financial data isn't public.
 
-FAM011: Personal Accounts
+TODO FAM011: Personal Accounts
   As a family member
   I want my own account
   So the system can be personalized for me.
 
-FAM021: Name Accounts
+TODO FAM021: Name Accounts
   As a family member
   I want accounts to have names
   So I will know which account is which easily.
 
-FAM031: Hide Inactive Accounts
+TODO FAM031: Hide Inactive Accounts
   As a family member
   I don't want to see inactive accounts when dealing with current information
   So that information is more clear.
 
-FAM041: Create Transactions
+TODO FAM041: Create Transactions
   As a family member
   I want to enter transactions
   So I can track my finances.
 
-FAM051: Associate Transaction With Account
+TODO FAM051: Associate Transaction With Account
   As a family member
   I want to enter the account associated with a transaction
   So that I can keep track of account balances.
 
-FAM061: Default Account
+TODO FAM061: Default Account
   As a family member
   I want to have a default account
   to save time when entering transactions.
 
-FAM071: Timestamp Transaction
+TODO FAM071: Timestamp Transaction
   As a family member
   I want to enter the time when I made a transaction
   So I can know that the transaction was made.
 
-FAM081: Activate Transaction At Specific Timestamp 
+TODO FAM081: Activate Transaction At Specific Timestamp 
   As a family member
   I want to enter the time when a transaction should take effect
   So I can accurately track "online bill transactions" impact on my balances.
 
-FAM091: Timestamp Transaction Processing Time
+TODO FAM091: Timestamp Transaction Processing Time
   As a family member
   I want to enter when a transaction actually occurred
   So I can accurately track my account balance.
 
-FAM101: Display Non-Reconciled Transactions
+TODO FAM101: Display Non-Reconciled Transactions
   As a family member
   I want to see which transactions are not yet reconciled
   So that I can find transactions which are still outstanding.
 
-FAM111: Display Account Balance
+TODO FAM111: Display Account Balance
   As a family member
   I want to see my account balance
   So that I know the current amount of money in a real account.
 
-FAM121: Display True Account Balance
+TODO FAM121: Display True Account Balance
   As a family member
   I want to see my available account balance
   So that I don't mistakenly spend money that I don't really have.
 
-FAM131: Display Projected Account Balance 
+TODO FAM131: Display Projected Account Balance 
   As a family member
   I want to see projected balances into the future
   So that my accounts don't get overdrawn by planned transactions.
 
-FAM141: Create Periodic Transactions
+TODO FAM141: Create Periodic Transactions
   As a family member
   I want to have periodic transactions
   So that I don't forget to account for automated transactions.
 
-FAM151: Associate Transaction With User
+TODO FAM151: Associate Transaction With User
   As a family member
   I want transactions to be associated with family members
   So that I can more readily sort and analyze transactions.
 
-FAM161: Automatically Associate Transaction With Current User
+TODO FAM161: Automatically Associate Transaction With Current User
   As a family member
   I want transactions that I enter to be associated with me
   So that I don't have to enter redundant information.
