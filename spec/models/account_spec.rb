@@ -13,6 +13,10 @@ describe Account do
     it 'can have a name' do
       @account.should respond_to(:name)
     end
+
+    it 'can have an initial balance' do
+      @account.should respond_to(:initialBalance)
+    end
   end
   
   describe 'validations' do
@@ -31,6 +35,12 @@ describe Account do
       dup = Account.generate(:name => account.name)
       dup.should_not be_valid
       dup.should have(1).errors_on(:name)
+    end
+
+    it 'must have an initial balance to be valid' do
+      @account.initialBalance = nil
+      @account.should_not be_valid
+      @account.should have(1).errors_on(:initialBalance)
     end
   end
 end
