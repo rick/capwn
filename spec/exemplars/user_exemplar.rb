@@ -22,4 +22,5 @@ class User
     5.days.ago 
   end
   generator_for :salt,       '7e3041ebc2fc05a40c60028e2c4901a81035d3cd'
+  generator_for :isAdmin, true
 end
