@@ -20,8 +20,13 @@ class ApplicationController < ActionController::Base
 
   def admin_required
     unless @current_user.isAdmin
-      flash[:notice] = "Only admins can access this functionality"
-      redirect_to root_path
+      if defined? admin_required_params
+        flash[:error] = admin_required_params[:message]
+        redirect_to admin_required_params[:return_url]
+      else
+        flash[:error] = "Only admins can access this functionality"
+        redirect_to root_path
+      end
     end
   end
 end

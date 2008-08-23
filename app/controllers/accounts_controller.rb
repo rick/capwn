@@ -1,5 +1,15 @@
 class AccountsController < ApplicationController
+  before_filter :admin_required, :except => 'index'
+
   resources_controller_for :accounts
+
+  # Used to redirect on failed :admin_required
+  def admin_required_params
+    { 
+      :return_url => accounts_path,
+      :message    => "We're sorry, only admins have access to modify or create accounts" 
+    }
+  end
 
   def create
     self.resource = new_resource
