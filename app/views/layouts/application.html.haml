@@ -9,4 +9,8 @@
       %ul
         %li= link_to 'Accounts', accounts_path
     .content
+      - if flash[:notice]
+        .notice= flash[:notice] 
+      - if flash[:error]
+        .error= flash[:error]
       = yield
