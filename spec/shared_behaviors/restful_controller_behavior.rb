@@ -251,7 +251,11 @@ shared_examples_for 'a RESTful controller with an update action' do
       @model_class.stubs(:find).returns(@obj)
       do_login if needs_login?
       
-      object_path_setup
+      if redirects_to_index
+        object_path_setup :plural
+      else
+        object_path_setup
+      end
       find_target_setup
     end
   
