@@ -1,6 +1,6 @@
 accounting system stories
 
-TODO ADM001: Create Accounts
+ADM001: Create Accounts
   As an administrator
   I want to set up accounts
   So I can keep track of money that is in real accounts.
