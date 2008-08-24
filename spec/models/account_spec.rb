@@ -40,7 +40,22 @@ describe Account do
     it 'must have an initial balance to be valid' do
       @account.initialBalance = nil
       @account.should_not be_valid
-      @account.should have(1).errors_on(:initialBalance)
+      @account.should have_at_least(1).errors_on(:initialBalance)
+      @account.errors.on(:initialBalance).should include("can't be blank")
+    end
+
+    it 'must have a numeric initial balance to be valid' do
+      @account.initialBalance = 'invalid balance'
+      @account.should_not be_valid
+      @account.should have_at_least(1).errors_on(:initialBalance)
+      @account.errors.on(:initialBalance).should include("is not a number")
+    end
+
+    it 'must have an initial balance at least 0 to be valid' do
+      @account.initialBalance = -1.0
+      @account.should_not be_valid
+      @account.should have_at_least(1).errors_on(:initialBalance)
+      @account.errors.on(:initialBalance).should include("must be greater than or equal to 0")
     end
   end
 end
