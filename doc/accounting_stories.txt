@@ -5,7 +5,7 @@ ADM001: Create Accounts
   I want to set up accounts
   So I can keep track of money that is in real accounts.
 
-TODO ADM011: Create Initial Balance 
+ADM011: Create Initial Balance 
   As an administrator
   I want to set the initial balance of an account
   So reconciling with real account balances is possible.
