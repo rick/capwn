@@ -17,6 +17,10 @@ describe Account do
     it 'can have an initial balance' do
       @account.should respond_to(:initialBalance)
     end
+    
+    it 'can have a formatted initial balance' do
+      @account.should respond_to(:formatted_initial_balance)
+    end
   end
   
   describe 'validations' do
