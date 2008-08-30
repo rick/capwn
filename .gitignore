@@ -6,3 +6,4 @@ db/*.db
 log/*.log
 /coverage
 doc/specs
+doc/api
