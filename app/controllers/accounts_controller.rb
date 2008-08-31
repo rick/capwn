@@ -32,6 +32,8 @@ class AccountsController < ApplicationController
   end
 
   def find_resources
-    resource_service.find :all, :order => 'name'
+    resource_service.find :all,
+      :conditions => ['active = ?', true],
+      :order => 'name'
   end
 end

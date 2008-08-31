@@ -18,7 +18,16 @@ describe AccountsController do
   end
 end
 
-describe AccountsController do
+describe AccountsController, "handling GET /plural (index)" do
+  it 'should assign active accounts' do
+    active_accounts = [stub(:account)]
+    login_as User.generate(:isAdmin => false)
+    Account.expects(:find).with(:all, {:conditions => ['active = ?', true], :order => 'name'}).returns(active_accounts)
+    get :index
+  end
+end
+
+describe AccountsController, 'administration' do
 
   before :each do
     account = stub(:account)
