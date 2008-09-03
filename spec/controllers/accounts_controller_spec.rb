@@ -21,14 +21,35 @@ end
 describe AccountsController, "handling GET /plural (index)" do
   it 'should assign active accounts by default' do
     login_as User.generate
+
     Account.expects(:find).with(:all, {:conditions => ['active = ?', true], :order => 'name'}).returns [stub(:account, :active => true)]
+
     get :index
+  end
+  it 'should assign a link to inactive accounts by default' do
+    login_as User.generate
+    get :index
+
+    # TODO: only testing text of link because I get an error
+    # undefined method url_for if I use the entire text
+    flash[:link].should include("View Inactive Accounts")
   end
 
   it 'should assign inactive accounts when params[:active] == false' do
     login_as User.generate
+
     Account.expects(:find).with(:all, {:conditions => ['active = ?', false], :order => 'name'}).returns [stub(:account, :active => false)]
+
     get :index, :active => "false"
+  end
+
+  it 'should assign a link to active accounts when params[:active] == false' do
+    login_as User.generate
+    get :index, :active => "false"
+
+    # TODO: only testing text of link because I get an error
+    # undefined method url_for if I use the entire text
+    flash[:link].should include("View Active Accounts")
   end
 end
 

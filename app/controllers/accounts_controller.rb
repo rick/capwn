@@ -11,6 +11,16 @@ class AccountsController < ApplicationController
     }
   end
 
+  def index
+    self.resources = find_resources
+
+    if params[:active] == "false"
+      flash[:link] = "<a href=\"#{url_for(:controller => 'accounts', :action => 'index')}\">View Active Accounts</a>"
+    else
+      flash[:link] = "<a href=\"#{url_for(:controller => 'accounts', :action => 'index', :active => 'false')}\">View Inactive Accounts</a>"
+    end
+  end
+
   def create
     self.resource = new_resource
     if resource.save
