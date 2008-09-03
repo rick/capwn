@@ -19,11 +19,16 @@ describe AccountsController do
 end
 
 describe AccountsController, "handling GET /plural (index)" do
-  it 'should assign active accounts' do
-    active_accounts = [stub(:account)]
-    login_as User.generate(:isAdmin => false)
-    Account.expects(:find).with(:all, {:conditions => ['active = ?', true], :order => 'name'}).returns(active_accounts)
+  it 'should assign active accounts by default' do
+    login_as User.generate
+    Account.expects(:find).with(:all, {:conditions => ['active = ?', true], :order => 'name'}).returns [stub(:account, :active => true)]
     get :index
+  end
+
+  it 'should assign inactive accounts when params[:active] == false' do
+    login_as User.generate
+    Account.expects(:find).with(:all, {:conditions => ['active = ?', false], :order => 'name'}).returns [stub(:account, :active => false)]
+    get :index, :active => "false"
   end
 end
 
