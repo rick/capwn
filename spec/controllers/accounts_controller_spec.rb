@@ -30,9 +30,7 @@ describe AccountsController, "handling GET /plural (index)" do
     login_as User.generate
     get :index
 
-    # TODO: only testing text of link because I get an error
-    # undefined method url_for if I use the entire text
-    flash[:link].should include("View Inactive Accounts")
+    flash[:link].should include("<a href=\"#{controller.url_for(:controller => 'accounts', :action => 'index', :active => 'false')}\">View Inactive Accounts</a>")
   end
 
   it 'should assign inactive accounts when params[:active] == false' do
@@ -47,9 +45,7 @@ describe AccountsController, "handling GET /plural (index)" do
     login_as User.generate
     get :index, :active => "false"
 
-    # TODO: only testing text of link because I get an error
-    # undefined method url_for if I use the entire text
-    flash[:link].should include("View Active Accounts")
+    flash[:link].should include("<a href=\"#{controller.url_for(:controller => 'accounts', :action => 'index')}\">View Active Accounts</a>")
   end
 end
 
