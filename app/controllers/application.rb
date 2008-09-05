@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   before_filter :login_required
 
   def admin_required
-    unless @current_user.isAdmin
+    unless @current_user.admin
       if defined? admin_required_params
         flash[:error] = admin_required_params[:message]
         redirect_to admin_required_params[:return_url]

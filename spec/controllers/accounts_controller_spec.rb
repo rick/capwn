@@ -15,7 +15,7 @@ describe AccountsController do
     account = stub(:account)
     accounts = [account]
     Account.stubs(:find).returns(accounts)
-    login_as User.generate(:isAdmin => false)
+    login_as User.generate(:admin => false)
     get :index
 
     response.should render_template('index')
@@ -59,7 +59,7 @@ describe AccountsController, 'administration' do
     account = stub(:account)
     accounts = [account]
     Account.stubs(:active).returns(accounts)
-    login_as User.generate(:isAdmin => false)
+    login_as User.generate(:admin => false)
   end
 
   it 'should not allow non-admins to access new account functionality' do
