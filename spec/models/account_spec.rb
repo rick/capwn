@@ -21,6 +21,10 @@ describe Account do
     it 'can have a formatted initial balance' do
       @account.should respond_to(:formatted_initial_balance)
     end
+
+    it 'can have an isactive flag' do
+      @account.should respond_to(:isactive)
+    end
   end
   
   describe 'validations' do
@@ -60,6 +64,43 @@ describe Account do
       @account.should_not be_valid
       @account.should have_at_least(1).errors_on(:initialBalance)
       @account.errors.on(:initialBalance).should include("must be greater than or equal to 0")
+    end
+  end
+
+  describe 'finders' do
+    before :each do
+      Account.generate(:name => 'account 01')
+      Account.generate(:name => 'account 03')
+      Account.generate(:name => 'account 02')
+      Account.generate(:name => 'account 05')
+      Account.generate(:name => 'account 04')
+      Account.generate(:name => 'inactive account 02', :isactive => false)
+      Account.generate(:name => 'inactive account 03', :isactive => false)
+      Account.generate(:name => 'inactive account 01', :isactive => false)
+    end
+    
+    it 'should find active accounts' do
+      Account.active.count.should == 5
+    end
+    
+    it 'should find inactive accounts' do
+      Account.inactive.count.should == 3
+    end
+
+    it 'should order active accounts by name' do
+      accounts = Account.active
+      for i in (0...accounts.count - 1)
+        puts i
+        accounts[i].name.should < accounts[i+1].name
+      end
+    end
+
+    it 'should order active accounts by name' do
+      accounts = Account.inactive
+      for i in (0...accounts.count - 1)
+        puts i
+        accounts[i].name.should < accounts[i+1].name
+      end
     end
   end
 end
