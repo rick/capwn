@@ -10,7 +10,7 @@ ADM011: Create Initial Balance
   I want to set the initial balance of an account
   So reconciling with real account balances is possible.
 
-TODO ADM021: Inactivate Accounts
+ADM021: Inactivate Accounts
   As an administrator
   I want to mark an account as inactive
   So that old accounts don't confuse data management.
