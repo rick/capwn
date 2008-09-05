@@ -22,8 +22,8 @@ describe Account do
       @account.should respond_to(:formatted_initial_balance)
     end
 
-    it 'can have an isactive flag' do
-      @account.should respond_to(:isactive)
+    it 'can have an active flag' do
+      @account.should respond_to(:active)
     end
   end
   
@@ -74,9 +74,9 @@ describe Account do
       Account.generate(:name => 'account 02')
       Account.generate(:name => 'account 05')
       Account.generate(:name => 'account 04')
-      Account.generate(:name => 'inactive account 02', :isactive => false)
-      Account.generate(:name => 'inactive account 03', :isactive => false)
-      Account.generate(:name => 'inactive account 01', :isactive => false)
+      Account.generate(:name => 'inactive account 02', :active => false)
+      Account.generate(:name => 'inactive account 03', :active => false)
+      Account.generate(:name => 'inactive account 01', :active => false)
     end
     
     it 'should find active accounts' do

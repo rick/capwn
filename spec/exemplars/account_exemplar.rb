@@ -3,4 +3,5 @@ class Account
     prev.succ
   end
   generator_for :initialBalance, rand(99999)
+  generator_for :active, true
 end
