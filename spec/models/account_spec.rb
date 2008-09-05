@@ -90,7 +90,6 @@ describe Account do
     it 'should order active accounts by name' do
       accounts = Account.active
       for i in (0...accounts.count - 1)
-        puts i
         accounts[i].name.should < accounts[i+1].name
       end
     end
@@ -98,7 +97,6 @@ describe Account do
     it 'should order active accounts by name' do
       accounts = Account.inactive
       for i in (0...accounts.count - 1)
-        puts i
         accounts[i].name.should < accounts[i+1].name
       end
     end
