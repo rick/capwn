@@ -647,7 +647,7 @@ def needs_login?()
 end
 
 def do_login
-  login_as User.generate   
+  login_as User.generate :admin => true   
 end
 
 unless defined? nesting_params
