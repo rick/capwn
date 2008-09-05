@@ -42,10 +42,10 @@ class AccountsController < ApplicationController
   end
 
   def find_resources
-    active = true
-    active = false if params[:active] == "false"
-    resource_service.find :all,
-      :conditions => ['active = ?', active],
-      :order => 'name'
+    if params[:active] == "false"
+      resource_service.inactive
+    else
+      resource_service.active
+    end
   end
 end

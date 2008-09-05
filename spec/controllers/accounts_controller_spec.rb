@@ -5,6 +5,10 @@ describe AccountsController do
     true
   end
 
+  def finder
+    {:method => :active}
+  end
+
   it_should_behave_like 'a RESTful controller requiring login'
 
   it 'should allow non-admins to view list of accounts' do
@@ -22,7 +26,7 @@ describe AccountsController, "handling GET /plural (index)" do
   it 'should assign active accounts by default' do
     login_as User.generate
 
-    Account.expects(:find).with(:all, {:conditions => ['active = ?', true], :order => 'name'}).returns [stub(:account, :active => true)]
+    Account.expects(:active).returns [stub(:account, :active => true)]
 
     get :index
   end
@@ -36,7 +40,7 @@ describe AccountsController, "handling GET /plural (index)" do
   it 'should assign inactive accounts when params[:active] == false' do
     login_as User.generate
 
-    Account.expects(:find).with(:all, {:conditions => ['active = ?', false], :order => 'name'}).returns [stub(:account, :active => false)]
+    Account.expects(:inactive).returns [stub(:account, :active => false)]
 
     get :index, :active => "false"
   end
@@ -54,7 +58,7 @@ describe AccountsController, 'administration' do
   before :each do
     account = stub(:account)
     accounts = [account]
-    Account.stubs(:find).returns(accounts)
+    Account.stubs(:active).returns(accounts)
     login_as User.generate(:isAdmin => false)
   end
 

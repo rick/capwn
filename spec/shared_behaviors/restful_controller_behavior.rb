@@ -37,7 +37,11 @@ shared_examples_for 'a RESTful controller with an index action' do
     end
     
     it "should find all the objects" do
-      @find_target.expects(:find).returns(@objects)
+      if finder
+        @find_target.expects(finder[:method]).returns(@objects)
+      else
+        @find_target.expects(:find).returns(@objects)
+      end
       do_get
     end
   
