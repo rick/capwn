@@ -15,8 +15,7 @@ ADM021: Inactivate Accounts
   I want to mark an account as inactive
   So that old accounts don't confuse data management.
 
-
-TODO FAM001: Require login
+FAM001: Require login
   As a family member
   I want the site to require login
   So my financial data isn't public.
