@@ -20,9 +20,9 @@ FAM001: Require login
   I want the site to require login
   So my financial data isn't public.
 
-TODO FAM011: Personal Accounts
+FAM011: Personal Logins
   As a family member
-  I want my own account
+  I want my own login
   So the system can be personalized for me.
 
 TODO FAM021: Name Accounts
