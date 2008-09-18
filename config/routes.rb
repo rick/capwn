@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
 
 
-  map.resources :accounts
+  map.resources :accounts, :collection => { :active => :get, :inactive => :get }
 
   map.resources :categories
 

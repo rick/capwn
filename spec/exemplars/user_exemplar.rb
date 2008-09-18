@@ -3,7 +3,7 @@ class User
   generator_for :login, :start => 'Login000' do |prev|
     prev.succ
   end
-
+  generator_for :admin, true
   generator_for :name, :start => 'Name 000' do |prev|
     name, id = prev.split(/ /)
     "#{name} #{id.succ}"

@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_filter :admin_required, :except => 'index'
+  before_filter :admin_required, :except => ['index', 'active', 'inactive']
 
   resources_controller_for :accounts
 
@@ -12,13 +12,7 @@ class AccountsController < ApplicationController
   end
 
   def index
-    self.resources = find_resources
-
-    if params[:active] == "false"
-      flash[:link] = "<a href=\"#{url_for(:controller => 'accounts', :action => 'index')}\">View Active Accounts</a>"
-    else
-      flash[:link] = "<a href=\"#{url_for(:controller => 'accounts', :action => 'index', :active => 'false')}\">View Inactive Accounts</a>"
-    end
+    find_resources_and_set_links
   end
 
   def create
@@ -29,7 +23,6 @@ class AccountsController < ApplicationController
       render :action => "new"
     end
   end
-
   def update
     self.resource = find_resource
     resource.attributes = params[resource_name]
@@ -41,11 +34,40 @@ class AccountsController < ApplicationController
     end
   end
 
+  def active
+    find_resources_and_set_links
+    render :action => 'index'
+  end
+
+  def inactive
+    find_resources_and_set_links
+    render :action => 'index'
+  end
+
+  protected
+
   def find_resources
-    if params[:active] == "false"
+    if params[:action] == "inactive"
       resource_service.inactive
     else
       resource_service.active
+    end
+  end
+
+  def url_for_active_accounts
+    "<a href=\"#{url_for(:controller => 'accounts', :action => 'active')}\">View Active Accounts</a>"
+  end
+
+  def url_for_inactive_accounts
+    "<a href=\"#{url_for(:controller => 'accounts', :action => 'inactive')}\">View Inactive Accounts</a>"
+  end
+  def find_resources_and_set_links
+    self.resources = find_resources
+
+    if params[:action] == "inactive"
+      flash[:link] = url_for_active_accounts 
+    else
+      flash[:link] = url_for_inactive_accounts
     end
   end
 end

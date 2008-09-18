@@ -23,6 +23,7 @@ describe AccountsController do
 end
 
 describe AccountsController, "handling GET /plural (index)" do
+
   it 'should assign active accounts by default' do
     login_as User.generate
 
@@ -30,26 +31,48 @@ describe AccountsController, "handling GET /plural (index)" do
 
     get :index
   end
+
   it 'should assign a link to inactive accounts by default' do
     login_as User.generate
     get :index
 
-    flash[:link].should include("<a href=\"#{controller.url_for(:controller => 'accounts', :action => 'index', :active => 'false')}\">View Inactive Accounts</a>")
+    flash[:link].should include("<a href=\"#{controller.url_for(:controller => 'accounts', :action => 'inactive')}\">View Inactive Accounts</a>")
   end
 
+end
+
+describe AccountsController, "handling GET /plural (active)" do
+
+  it 'should assign active accounts by default' do
+    login_as User.generate
+
+    Account.expects(:active).returns [stub(:account, :active => true)]
+    get :active
+
+  end
+
+  it 'should assign a link to inactive accounts by default' do
+    login_as User.generate
+    get :active
+
+    flash[:link].should include("<a href=\"#{controller.url_for(:controller => 'accounts', :action => 'inactive')}\">View Inactive Accounts</a>")
+  end
+
+end
+describe AccountsController, "handling GET /plural (inactive)" do
   it 'should assign inactive accounts when params[:active] == false' do
     login_as User.generate
 
     Account.expects(:inactive).returns [stub(:account, :active => false)]
 
-    get :index, :active => "false"
+    get :inactive
   end
 
   it 'should assign a link to active accounts when params[:active] == false' do
     login_as User.generate
-    get :index, :active => "false"
+    get :inactive
 
-    flash[:link].should include("<a href=\"#{controller.url_for(:controller => 'accounts', :action => 'index')}\">View Active Accounts</a>")
+    flash[:link].should include("<a href=\"#{controller.url_for(:controller => 'accounts', :action => 'active')}\">View Active Accounts</a>")
   end
 end
 
