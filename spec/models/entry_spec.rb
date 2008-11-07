@@ -6,8 +6,12 @@ describe Entry do
       @entry = Entry.new
     end
     
-    it 'can have an account' do
-      @entry.should respond_to(:account)
+    it 'can have a debit account' do
+      @entry.should respond_to(:debit_account)
+    end
+    
+    it 'can have a credit account' do
+      @entry.should respond_to(:credit_account)
     end
     
     it 'can have a transaction' do
@@ -21,14 +25,20 @@ describe Entry do
   
   describe 'validations' do
     before :each do
-      @account = Account.generate!
-      @entry = Entry.generate(:account => @account)
+      @entry = Entry.generate(:debit_account  => Account.generate!, 
+                              :credit_account => Account.generate!)
     end
     
-    it 'must have an account to be valid' do
-      @entry.account = nil
+    it 'must have a debit account to be valid' do
+      @entry.debit_account = nil
       @entry.should_not be_valid
-      @entry.should have(1).errors_on(:account)
+      @entry.should have(1).errors_on(:debit_account)
+    end
+    
+    it 'must have a credit account to be valid' do
+      @entry.credit_account = nil
+      @entry.should_not be_valid
+      @entry.should have(1).errors_on(:credit_account)
     end
     
     it 'must have an amount to be valid' do

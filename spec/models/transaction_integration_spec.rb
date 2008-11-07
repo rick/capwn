@@ -30,8 +30,9 @@ describe "Making a purchase from a cash account" do
       :paid_at => Time.now,
       :user => @user)
     
-    @transaction.entries.create!(:account => @cash, :amount => 24)
-    @transaction.entries.create!(:account => @groceries, :amount => -24)
+    @transaction.entries.create!(:debit_account   => @cash, 
+                                 :credit_account  => @groceries, 
+                                 :amount          => 24)
   end
 
   describe "and reconciling" do
