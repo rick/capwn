@@ -15,7 +15,7 @@ describe Account do
     end
 
     it 'can have an initial balance' do
-      @account.should respond_to(:initialBalance)
+      @account.should respond_to(:initial_balance)
     end
     
     it 'can have an active flag' do
@@ -42,24 +42,24 @@ describe Account do
     end
 
     it 'must have an initial balance to be valid' do
-      @account.initialBalance = nil
+      @account.initial_balance = nil
       @account.should_not be_valid
-      @account.should have_at_least(1).errors_on(:initialBalance)
-      @account.errors.on(:initialBalance).should include("can't be blank")
+      @account.should have_at_least(1).errors_on(:initial_balance)
+      @account.errors.on(:initial_balance).should include("can't be blank")
     end
 
     it 'must have a numeric initial balance to be valid' do
-      @account.initialBalance = 'invalid balance'
+      @account.initial_balance = 'invalid balance'
       @account.should_not be_valid
-      @account.should have_at_least(1).errors_on(:initialBalance)
-      @account.errors.on(:initialBalance).should include("is not a number")
+      @account.should have_at_least(1).errors_on(:initial_balance)
+      @account.errors.on(:initial_balance).should include("is not a number")
     end
 
     it 'must have an initial balance at least 0 to be valid' do
-      @account.initialBalance = -1.0
+      @account.initial_balance = -1.0
       @account.should_not be_valid
-      @account.should have_at_least(1).errors_on(:initialBalance)
-      @account.errors.on(:initialBalance).should include("must be greater than or equal to 0")
+      @account.should have_at_least(1).errors_on(:initial_balance)
+      @account.errors.on(:initial_balance).should include("must be greater than or equal to 0")
     end
   end
 

@@ -7,7 +7,7 @@ class Account < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
-  validates_presence_of :initialBalance
-  validates_numericality_of :initialBalance, :greater_than_or_equal_to => 0.00
+  validates_presence_of :initial_balance
+  validates_numericality_of :initial_balance, :greater_than_or_equal_to => 0.00
 
 end
