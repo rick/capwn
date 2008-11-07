@@ -18,10 +18,6 @@ describe Account do
       @account.should respond_to(:initialBalance)
     end
     
-    it 'can have a formatted initial balance' do
-      @account.should respond_to(:formatted_initial_balance)
-    end
-
     it 'can have an active flag' do
       @account.should respond_to(:active)
     end
