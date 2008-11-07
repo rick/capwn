@@ -13,7 +13,7 @@
       %td.name
         = link_to account.name, edit_account_path(account)
       %td.initialbalance
-        = currencize(account.initialBalance)
+        = currencize(account.initial_balance)
 
 .paths
   = flash[:link] 
