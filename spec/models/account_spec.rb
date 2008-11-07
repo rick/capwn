@@ -18,6 +18,10 @@ describe Account do
       @account.should respond_to(:entries)
     end
     
+    it 'can have memos' do
+      @account.should respond_to(:memos)
+    end
+    
     it 'can have a name' do
       @account.should respond_to(:name)
     end

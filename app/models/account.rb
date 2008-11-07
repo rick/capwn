@@ -16,4 +16,8 @@ class Account < ActiveRecord::Base
       :conditions => ["debit_account_id = ? OR credit_account_id = ?", self.id, self.id]
   end
 
+  def memos
+    Memo.find(:all, :conditions => ["id in (SELECT memo_id FROM Entries WHERE debit_account_id = ? OR credit_account_id = ?)", self.id, self.id])
+  end
+
 end
