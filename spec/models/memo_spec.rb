@@ -18,9 +18,6 @@ describe Memo do
       @memo.should respond_to(:text)
     end
     
-    it 'can have a payment date' do
-      @memo.should respond_to(:paid_at)
-    end
   end
   
   describe 'validations' do
@@ -35,11 +32,6 @@ describe Memo do
       @memo.should have(1).errors_on(:user)
     end
     
-    it 'must have a payment date to be valid' do
-      @memo.paid_at = nil
-      @memo.should_not be_valid
-      @memo.should have(1).errors_on(:paid_at)      
-    end
   end
 end
   
