@@ -6,6 +6,14 @@ describe Account do
       @account = Account.new
     end
     
+    it 'can have debit_entries' do
+      @account.should respond_to(:debit_entries)
+    end
+    
+    it 'can have credit_entries' do
+      @account.should respond_to(:credit_entries)
+    end
+
     it 'can have entries' do
       @account.should respond_to(:entries)
     end
