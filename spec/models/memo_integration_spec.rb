@@ -6,33 +6,33 @@ describe "Making a purchase from a cash account" do
     @cash = Account.generate!
     @groceries = Account.generate!
   end
-  
+
   it 'should require a payment date'
-  it 'should require a transaction party'
+  it 'should require a memo party'
   it 'should require a cash account entry'
-  
+
   describe 'the cash account entry' do
     it 'should require the cash account'
     it 'should require an amount'
   end
-  
+
   it 'should require a tagged account entry'
-  
+
   describe 'the tagged account entry' do
     it 'should require the tagged account'
     it 'should require an amount'
   end
-  
-  it 'should require the transaction to balance'
+
+  it 'should require the memo to balance'
 
   it 'should succeed if all necessary information is provided' do
-    @transaction = Transaction.create!(
-      :paid_at => Time.now,
-      :user => @user)
-    
-    @transaction.entries.create!(:debit_account   => @cash, 
-                                 :credit_account  => @groceries, 
-                                 :amount          => 24)
+    @memo = Memo.create!(:text => 'test memo',
+                         :paid_at => Time.now,
+                         :user => @user)
+
+    @memo.entries.create!(:debit_account   => @cash, 
+                          :credit_account  => @groceries, 
+                          :amount          => 24)
   end
 
   describe "and reconciling" do
@@ -41,26 +41,26 @@ describe "Making a purchase from a cash account" do
 end
 
 describe "Making a purchase from a checking account to a merchant via check card" do
-  
+
   describe "and reconciling" do
     it "should be able to reconcile against the checking account entry"
   end
 end
 
 describe "Making a purchase from a checking acocunt to a merchant via check" do
-  
+
   it "should allow entering a check number"
-  
+
   describe "and reconciling" do
     it "should be able to reconcile against the check entry"
   end
 end
 
 describe "Making an ATM withdrawal from a checking account" do
-  
+
   it "should require a checking account entry"
   it "should require a cash account entry"
-  
+
   describe "and reconciling" do
     it "should be able to reconcile against the check entry"
     it "should not attempt to reconcile against the cash account entry"
@@ -69,7 +69,7 @@ describe "Making an ATM withdrawal from a checking account" do
   describe "with ATM fees" do
     it "should allow a bank fee entry"
     it "should allow an ATM fee entry (foreign bank)"
-    
+
     describe "and reconciling" do
       it "should be able to reconcile against any bank fee entry"
       it "should be able to reconcile against any ATM fee entry"
@@ -99,8 +99,8 @@ end
 describe 'Paying a bill via online bill payment' do
   it 'should allow entering an entry date'
   it 'should allow entering a payment date'
-  
+
   describe 'and reconciling' do
-    it 'should reconcile against the payment transaction'
+    it 'should reconcile against the payment memo'
   end
 end

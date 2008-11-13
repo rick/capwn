@@ -14,23 +14,23 @@ task :bootstrap => :environment do
   taxes     = Account.generate(:name => 'Taxes')
   groceries = Account.generate(:name => 'Groceries')
 
-  # Create Transactions/Entries
-  t1   = Transaction.generate(:memo => 'Paycheck',
+  # Create Memos/Entries
+  t1   = Memo.generate(:text => 'Paycheck',
                              :user => u)
 
   t1e1 = Entry.generate(:amount         => 80,
                         :debit_account  => income,
                         :credit_account => checking,
-                        :transaction    => t1)
+                        :memo    => t1)
   t1e2 = Entry.generate(:amount         => 20,
                         :debit_account  => income,
                         :credit_account => taxes,
-                        :transaction    => t1)
+                        :memo    => t1)
 
-  t2   = Transaction.generate(:memo => 'Buy Groceries',
+  t2   = Memo.generate(:text => 'Buy Groceries',
                               :user => u)
 
   t2e1 = Entry.generate(:debit_account  => checking,
                         :credit_account => groceries,
-                        :transaction    => t2)
+                        :memo    => t2)
 end

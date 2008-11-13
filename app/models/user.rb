@@ -2,7 +2,7 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
 
-  has_many :transactions
+  has_many :memos
 
   include Authentication
   include Authentication::ByPassword

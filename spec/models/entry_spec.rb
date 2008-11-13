@@ -14,8 +14,8 @@ describe Entry do
       @entry.should respond_to(:credit_account)
     end
     
-    it 'can have a transaction' do
-      @entry.should respond_to(:transaction)
+    it 'can have a memo' do
+      @entry.should respond_to(:memo)
     end
     
     it 'can have an amount' do
@@ -47,10 +47,10 @@ describe Entry do
       @entry.should have(1).errors_on(:amount)
     end
     
-    it 'must have a transaction to be valid' do
-      @entry.transaction = nil
+    it 'must have a memo to be valid' do
+      @entry.memo = nil
       @entry.should_not be_valid
-      @entry.should have(1).errors_on(:transaction)
+      @entry.should have(1).errors_on(:memo)
     end
   end
 end

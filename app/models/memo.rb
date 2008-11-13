@@ -1,4 +1,4 @@
-class Transaction < ActiveRecord::Base
+class Memo < ActiveRecord::Base
   belongs_to :user
   has_many :entries
   
