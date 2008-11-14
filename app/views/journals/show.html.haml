@@ -1,3 +1,23 @@
 %h1= @account.name
-Last modified on: 
-= @account.updated_at.strftime("%m/%d/%Y at %I:%M%p")
+
+%table.journal
+  %thead
+    %tr
+      %td.account Transfer To
+      %td.debit Debit
+      %td.credit Credit
+  - @account.memos.each do |memo|
+    %tr.memo
+      %td{:colspan=>3}= memo.text
+    - memo.entries.each do |entry|
+      %tr.entry
+        - if entry.debit_account == @account
+          %td.account= entry.credit_account.name
+          %td.debit= entry.amount
+          %td.credit
+        - else
+          %td.account= entry.debit_account.name
+          %td.debit
+          %td.credit= entry.amount
+
+  
