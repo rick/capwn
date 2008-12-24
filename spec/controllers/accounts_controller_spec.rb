@@ -9,12 +9,14 @@ describe AccountsController do
     {:method => :active}
   end
 
-  it_should_behave_like 'a RESTful controller with a show action requiring login'
-  it_should_behave_like 'a RESTful controller with a new action requiring login'
-  it_should_behave_like 'a RESTful controller with a create action requiring login'
-  it_should_behave_like 'a RESTful controller with an edit action requiring login'
-  it_should_behave_like 'a RESTful controller with an update action requiring login'
-  it_should_behave_like 'a RESTful controller with a destroy action requiring login'
+  describe '' do # Shared behaviors
+    it_should_behave_like 'a RESTful controller with a show action requiring login'
+    it_should_behave_like 'a RESTful controller with a new action requiring login'
+    it_should_behave_like 'a RESTful controller with a create action requiring login'
+    it_should_behave_like 'a RESTful controller with an edit action requiring login'
+    it_should_behave_like 'a RESTful controller with an update action requiring login'
+    it_should_behave_like 'a RESTful controller with a destroy action requiring login'
+  end
 
   it 'should allow non-admins to view list of accounts' do
     account = stub(:account)
