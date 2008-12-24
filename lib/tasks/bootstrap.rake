@@ -9,10 +9,10 @@ task :bootstrap => :environment do
                     :admin => true)
 
   # Create Accounts
-  income    = Account.generate(:name => 'Income')
-  checking  = Account.generate(:name => 'Checking')
-  taxes     = Account.generate(:name => 'Taxes')
-  groceries = Account.generate(:name => 'Groceries')
+  income    = Account.generate(:name => 'Income', :element => 'Revenue')
+  checking  = Account.generate(:name => 'Checking', :element => 'Asset')
+  taxes     = Account.generate(:name => 'Taxes', :element => 'Liability')
+  groceries = Account.generate(:name => 'Groceries', :element => 'Expense')
 
   # Create Memos/Entries
   t1   = Memo.generate(:text => 'Paycheck',
