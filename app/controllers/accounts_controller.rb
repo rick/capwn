@@ -11,8 +11,9 @@ class AccountsController < ApplicationController
     }
   end
 
-  # TODO: Assign resource by elements
-  #def index
+  def index
+    self.resources = resource_service.active
+  end
 
   def create
     self.resource = new_resource
@@ -34,7 +35,6 @@ class AccountsController < ApplicationController
   end
 
   def inactive
-    # TODO: Create template to render
     self.resources = resource_service.inactive
   end
 

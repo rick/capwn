@@ -41,39 +41,36 @@ end
 
 describe AccountsController, "handling GET /plural (index)" do
 
-  it 'should assign asset accounts' do
-    pending
+  it 'should find active accounts' do
     login_as User.generate
-    Account.expects(:assets)
+    Account.expects(:active)
     get :index
   end
 
-  it 'should return liability accounts' do
-    pending
+  it 'should assign accounts' do
     login_as User.generate
-    Account.expects(:liabilities)
     get :index
+    assigns[:accounts]
   end
 
-  it 'should return equity accounts' do
-    pending
+  it 'should assign active accounts by element with headers' do
     login_as User.generate
-    Account.expects(:equities)
     get :index
+    accounts = assigns[:accounts]
+    accounts.class.should eql(Array)
+    for i in 0...accounts.length
+      if i % 2 == 0
+        accounts[i].class.should eql(String)
+      else
+        accounts[i].class.should eql(ActiveRecord::NamedScope::Scope)
+      end
+    end
   end
 
-  it 'should return revenue accounts' do
-    pending
+  it 'should render default index template' do
     login_as User.generate
-    Account.expects(:revenues)
     get :index
-  end
-
-  it 'should return expense accounts' do
-    pending
-    login_as User.generate
-    Account.expects(:expenses)
-    get :index
+    response.should render_template('index')
   end
 end
 
