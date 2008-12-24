@@ -27,6 +27,16 @@ describe AccountsController do
 
     response.should render_template('index')
   end
+
+  it 'should allow non-admins to view list of inactive accounts' do
+    account = stub(:account)
+    accounts = [account]
+    Account.stubs(:find).returns(accounts)
+    login_as User.generate(:admin => false)
+    get :inactive
+
+    response.should render_template('inactive')
+  end
 end
 
 describe AccountsController, "handling GET /plural (index)" do
