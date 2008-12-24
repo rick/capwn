@@ -152,6 +152,19 @@ describe Account do
       end
     end
 
+    it 'should find active accounts' do
+      Account.active.length.should == 5
+    end
+
+    it 'should find active accounts by element' do
+      accounts = Account.active
+      accounts[0].count.should == 2
+      accounts[1].count.should == 3 
+      accounts[2].count.should == 2
+      accounts[3].count.should == 2
+      accounts[4].count.should == 2
+    end 
+
     it 'should find asset accounts' do
       accounts = Account.assets.count.should == 2
     end

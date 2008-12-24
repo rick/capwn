@@ -22,6 +22,10 @@ class Account < ActiveRecord::Base
   named_scope :revenues, :conditions => ['element = ? AND active = ?', 'Revenue', true], :order => 'name'
   named_scope :expenses, :conditions => ['element = ? AND active = ?', 'Expense', true], :order => 'name'
 
+  def self.active
+    [Account.assets, Account.liabilities, Account.equities, Account.revenues, Account.expenses]
+  end
+
   def entries
     Entry.find :all, 
       :conditions => ["debit_account_id = ? OR credit_account_id = ?", self.id, self.id]
