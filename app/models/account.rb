@@ -23,7 +23,7 @@ class Account < ActiveRecord::Base
   named_scope :expenses, :conditions => ['element = ? AND active = ?', 'Expense', true], :order => 'name'
 
   def self.active
-    [Account.assets, Account.liabilities, Account.equities, Account.revenues, Account.expenses]
+    ['Asset', Account.assets, 'Liability', Account.liabilities, 'Equity', Account.equities, 'Revenue', Account.revenues, 'Expense', Account.expenses]
   end
 
   def entries

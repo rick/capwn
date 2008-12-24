@@ -39,7 +39,7 @@ describe Account do
     end
 
     it 'should only provide Asset, Liability, Equity, Revenue, and Expense in the list of elements' do
-      Account::ELEMENTS.should eql ['Asset', 'Liability', 'Equity', 'Revenue', 'Expense']
+      Account::ELEMENTS.should eql(['Asset', 'Liability', 'Equity', 'Revenue', 'Expense'])
     end
   end
   
@@ -153,16 +153,21 @@ describe Account do
     end
 
     it 'should find active accounts' do
-      Account.active.length.should == 5
+      Account.active.length.should == 10 
     end
 
     it 'should find active accounts by element' do
       accounts = Account.active
-      accounts[0].count.should == 2
-      accounts[1].count.should == 3 
-      accounts[2].count.should == 2
-      accounts[3].count.should == 2
-      accounts[4].count.should == 2
+      accounts[0].should eql 'Asset'
+      accounts[1].count.should == 2 
+      accounts[2].should eql 'Liability'
+      accounts[3].count.should == 3
+      accounts[4].should eql 'Equity'
+      accounts[5].count.should == 2
+      accounts[6].should eql 'Revenue'
+      accounts[7].count.should == 2
+      accounts[8].should eql 'Expense'
+      accounts[9].count.should == 2
     end 
 
     it 'should find asset accounts' do
