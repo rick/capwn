@@ -1,0 +1,19 @@
+.paths
+  = link_to "Add New Account", new_account_path
+
+%table.account
+  %thead
+    %tr
+      %td
+        Account
+      %td
+        Initial Balance
+  - @accounts.each do |account|
+    %tr
+      %td.name
+        = link_to account.name, journal_path(account)
+      %td.initialbalance
+        = currencize(account.initial_balance)
+
+.paths
+  = flash[:link] 
