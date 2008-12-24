@@ -18,6 +18,12 @@ class Account < ActiveRecord::Base
   validates_inclusion_of :element, :in => ELEMENTS,
     :message => "must be Asset, Liability, Equity, Revenue, or Expense"
   
+  named_scope :assets, :conditions => ['element = ? AND active = ?', 'Asset', true], :order => 'name'
+  named_scope :liabilities, :conditions => ['element = ? AND active = ?', 'Liability', true], :order => 'name'
+  named_scope :equities, :conditions => ['element = ? AND active = ?', 'Equity', true], :order => 'name'
+  named_scope :revenues, :conditions => ['element = ? AND active = ?', 'Revenue', true], :order => 'name'
+  named_scope :expenses, :conditions => ['element = ? AND active = ?', 'Expense', true], :order => 'name'
+
   def entries
     Entry.find :all, 
       :conditions => ["debit_account_id = ? OR credit_account_id = ?", self.id, self.id]

@@ -125,18 +125,24 @@ describe Account do
 
   describe 'finders' do
     before :each do
-      Account.generate(:name => 'account 01')
-      Account.generate(:name => 'account 03')
-      Account.generate(:name => 'account 02')
-      Account.generate(:name => 'account 05')
-      Account.generate(:name => 'account 04')
-      Account.generate(:name => 'inactive account 02', :active => false)
-      Account.generate(:name => 'inactive account 03', :active => false)
-      Account.generate(:name => 'inactive account 01', :active => false)
+      Account.generate(:name => 'active asset', :element => 'Asset', :active => true)
+      Account.generate(:name => 'active asset 2', :element => 'Asset', :active => true)
+      Account.generate(:name => 'inactive asset', :element => 'Asset', :active => false)
+      Account.generate(:name => 'active liability', :element => 'Liability', :active => true)
+      Account.generate(:name => 'active liability 2', :element => 'Liability', :active => true)
+      Account.generate(:name => 'active liability 3', :element => 'Liability', :active => true)
+      Account.generate(:name => 'inactive liability', :element => 'Liability', :active => false)
+      Account.generate(:name => 'active equity', :element => 'Equity', :active => true)
+      Account.generate(:name => 'active equity 2', :element => 'Equity', :active => true)
+      Account.generate(:name => 'inactive equity', :element => 'Equity', :active => false)
+      Account.generate(:name => 'active revenue', :element => 'Revenue', :active => true)
+      Account.generate(:name => 'active revenue 2', :element => 'Revenue', :active => true)
+      Account.generate(:name => 'active expense', :element => 'Expense', :active => true)
+      Account.generate(:name => 'active expense 2', :element => 'Expense', :active => true)
     end
     
     it 'should find active accounts' do
-      Account.active.count.should == 5
+      Account.active.count.should == 11
     end
     
     it 'should find inactive accounts' do
@@ -150,8 +156,63 @@ describe Account do
       end
     end
 
-    it 'should order active accounts by name' do
+    it 'should order inactive accounts by name' do
       accounts = Account.inactive
+      for i in (0...accounts.count - 1)
+        accounts[i].name.should < accounts[i+1].name
+      end
+    end
+
+    it 'should find asset accounts' do
+      accounts = Account.assets.count.should == 2
+    end
+
+    it 'should order asset accounts by name' do
+      accounts = Account.assets
+      for i in (0...accounts.count - 1)
+        accounts[i].name.should < accounts[i+1].name
+      end
+    end
+
+    it 'should find liability accounts' do
+      accounts = Account.liabilities.count.should == 3
+    end
+
+    it 'should order liability accounts by name' do
+      accounts = Account.liabilities
+      for i in (0...accounts.count - 1)
+        accounts[i].name.should < accounts[i+1].name
+      end
+    end
+
+    it 'should find equity accounts' do
+      accounts = Account.equities.count.should == 2
+    end
+
+    it 'should order equity accounts by name' do
+      accounts = Account.equities
+      for i in (0...accounts.count - 1)
+        accounts[i].name.should < accounts[i+1].name
+      end
+    end
+
+    it 'should find revenue accounts' do
+      accounts = Account.revenues.count.should == 2
+    end
+
+    it 'should order revenue accounts by name' do
+      accounts = Account.revenues
+      for i in (0...accounts.count - 1)
+        accounts[i].name.should < accounts[i+1].name
+      end
+    end
+
+    it 'should find expense accounts' do
+      accounts = Account.expenses.count.should == 2
+    end
+
+    it 'should order expense accounts by name' do
+      accounts = Account.expenses
       for i in (0...accounts.count - 1)
         accounts[i].name.should < accounts[i+1].name
       end
