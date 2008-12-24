@@ -64,15 +64,6 @@ describe AccountsController, "handling GET /plural (index)" do
     get :index
   end
 
-
-  it 'should assign active accounts by default' do
-    login_as User.generate
-
-    Account.expects(:active).returns [stub(:account, :active => true)]
-
-    get :index
-  end
-
   it 'should assign a link to inactive accounts by default' do
     login_as User.generate
     get :index
@@ -84,14 +75,6 @@ end
 
 describe AccountsController, "handling GET /plural (active)" do
 
-  it 'should assign active accounts by default' do
-    login_as User.generate
-
-    Account.expects(:active).returns [stub(:account, :active => true)]
-    get :active
-
-  end
-
   it 'should assign a link to inactive accounts by default' do
     login_as User.generate
     get :active
@@ -100,6 +83,7 @@ describe AccountsController, "handling GET /plural (active)" do
   end
 
 end
+
 describe AccountsController, "handling GET /plural (inactive)" do
   it 'should assign inactive accounts when params[:active] == false' do
     login_as User.generate

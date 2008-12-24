@@ -145,13 +145,6 @@ describe Account do
       Account.inactive.count.should == 3
     end
 
-    it 'should order active accounts by name' do
-      accounts = Account.active
-      for i in (0...accounts.count - 1)
-        accounts[i].name.should < accounts[i+1].name
-      end
-    end
-
     it 'should order inactive accounts by name' do
       accounts = Account.inactive
       for i in (0...accounts.count - 1)

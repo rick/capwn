@@ -50,7 +50,7 @@ class AccountsController < ApplicationController
     if params[:action] == "inactive"
       resource_service.inactive
     else
-      resource_service.active
+      resource_service
     end
   end
 

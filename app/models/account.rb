@@ -15,7 +15,6 @@ class Account < ActiveRecord::Base
   validates_inclusion_of :element, :in => ELEMENTS,
     :message => "must be Asset, Liability, Equity, Revenue, or Expense"
   
-  named_scope :active,  :conditions => ['active = ?', true], :order => 'name'
   named_scope :inactive,  :conditions => ['active = ?', false], :order => 'name'
   named_scope :assets, :conditions => ['element = ? AND active = ?', 'Asset', true], :order => 'name'
   named_scope :liabilities, :conditions => ['element = ? AND active = ?', 'Liability', true], :order => 'name'
