@@ -27,7 +27,6 @@ describe "Making a purchase from a cash account" do
 
   it 'should succeed if all necessary information is provided' do
     @memo = Memo.create!(:text => 'test memo',
-                         :paid_at => Time.now,
                          :user => @user)
 
     @memo.entries.create!(:debit_account   => @cash, 
