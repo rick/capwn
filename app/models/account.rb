@@ -5,9 +5,6 @@ class Account < ActiveRecord::Base
   has_many :debit_entries, :class_name => "Entry", :foreign_key => "debit_account_id"
   has_many :credit_entries, :class_name => "Entry", :foreign_key => "credit_account_id"
 
-  named_scope :active,    :conditions => ['active = ?', true], :order => 'name'
-  named_scope :inactive,  :conditions => ['active = ?', false], :order => 'name'
-  
   validates_presence_of :name
   validates_uniqueness_of :name
 
@@ -18,6 +15,8 @@ class Account < ActiveRecord::Base
   validates_inclusion_of :element, :in => ELEMENTS,
     :message => "must be Asset, Liability, Equity, Revenue, or Expense"
   
+  named_scope :active,  :conditions => ['active = ?', true], :order => 'name'
+  named_scope :inactive,  :conditions => ['active = ?', false], :order => 'name'
   named_scope :assets, :conditions => ['element = ? AND active = ?', 'Asset', true], :order => 'name'
   named_scope :liabilities, :conditions => ['element = ? AND active = ?', 'Liability', true], :order => 'name'
   named_scope :equities, :conditions => ['element = ? AND active = ?', 'Equity', true], :order => 'name'

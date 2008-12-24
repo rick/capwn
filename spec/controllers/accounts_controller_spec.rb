@@ -9,7 +9,12 @@ describe AccountsController do
     {:method => :active}
   end
 
-  it_should_behave_like 'a RESTful controller requiring login'
+  it_should_behave_like 'a RESTful controller with a show action requiring login'
+  it_should_behave_like 'a RESTful controller with a new action requiring login'
+  it_should_behave_like 'a RESTful controller with a create action requiring login'
+  it_should_behave_like 'a RESTful controller with an edit action requiring login'
+  it_should_behave_like 'a RESTful controller with an update action requiring login'
+  it_should_behave_like 'a RESTful controller with a destroy action requiring login'
 
   it 'should allow non-admins to view list of accounts' do
     account = stub(:account)
@@ -23,6 +28,42 @@ describe AccountsController do
 end
 
 describe AccountsController, "handling GET /plural (index)" do
+
+  it 'should assign asset accounts' do
+    pending
+    login_as User.generate
+    Account.expects(:assets)
+    get :index
+  end
+
+  it 'should return liability accounts' do
+    pending
+    login_as User.generate
+    Account.expects(:liabilities)
+    get :index
+  end
+
+  it 'should return equity accounts' do
+    pending
+    login_as User.generate
+    Account.expects(:equities)
+    get :index
+  end
+
+  it 'should return revenue accounts' do
+    pending
+    login_as User.generate
+    Account.expects(:revenues)
+    get :index
+  end
+
+  it 'should return expense accounts' do
+    pending
+    login_as User.generate
+    Account.expects(:expenses)
+    get :index
+  end
+
 
   it 'should assign active accounts by default' do
     login_as User.generate

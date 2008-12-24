@@ -141,10 +141,6 @@ describe Account do
       Account.generate(:name => 'active expense 2', :element => 'Expense', :active => true)
     end
     
-    it 'should find active accounts' do
-      Account.active.count.should == 11
-    end
-    
     it 'should find inactive accounts' do
       Account.inactive.count.should == 3
     end
