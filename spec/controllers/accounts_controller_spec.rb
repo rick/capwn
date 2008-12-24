@@ -63,25 +63,6 @@ describe AccountsController, "handling GET /plural (index)" do
     Account.expects(:expenses)
     get :index
   end
-
-  it 'should assign a link to inactive accounts by default' do
-    login_as User.generate
-    get :index
-
-    flash[:link].should include("<a href=\"#{controller.url_for(:controller => 'accounts', :action => 'inactive')}\">View Inactive Accounts</a>")
-  end
-
-end
-
-describe AccountsController, "handling GET /plural (active)" do
-
-  it 'should assign a link to inactive accounts by default' do
-    login_as User.generate
-    get :active
-
-    flash[:link].should include("<a href=\"#{controller.url_for(:controller => 'accounts', :action => 'inactive')}\">View Inactive Accounts</a>")
-  end
-
 end
 
 describe AccountsController, "handling GET /plural (inactive)" do
@@ -91,13 +72,6 @@ describe AccountsController, "handling GET /plural (inactive)" do
     Account.expects(:inactive).returns [stub(:account, :active => false)]
 
     get :inactive
-  end
-
-  it 'should assign a link to active accounts when params[:active] == false' do
-    login_as User.generate
-    get :inactive
-
-    flash[:link].should include("<a href=\"#{controller.url_for(:controller => 'accounts', :action => 'active')}\">View Active Accounts</a>")
   end
 end
 

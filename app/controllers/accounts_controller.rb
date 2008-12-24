@@ -11,9 +11,8 @@ class AccountsController < ApplicationController
     }
   end
 
-  def index
-    find_resources_and_set_links
-  end
+  # TODO: Assign resource by elements
+  #def index
 
   def create
     self.resource = new_resource
@@ -34,40 +33,11 @@ class AccountsController < ApplicationController
     end
   end
 
-  def active
-    find_resources_and_set_links
-    render :action => 'index'
-  end
-
   def inactive
-    find_resources_and_set_links
-    render :action => 'index'
+    # TODO: Create template to render
+    self.resources = resource_service.inactive
   end
 
   protected
 
-  def find_resources
-    if params[:action] == "inactive"
-      resource_service.inactive
-    else
-      resource_service
-    end
-  end
-
-  def url_for_active_accounts
-    "<a href=\"#{url_for(:controller => 'accounts', :action => 'active')}\">View Active Accounts</a>"
-  end
-
-  def url_for_inactive_accounts
-    "<a href=\"#{url_for(:controller => 'accounts', :action => 'inactive')}\">View Inactive Accounts</a>"
-  end
-  def find_resources_and_set_links
-    self.resources = find_resources
-
-    if params[:action] == "inactive"
-      flash[:link] = url_for_active_accounts 
-    else
-      flash[:link] = url_for_inactive_accounts
-    end
-  end
 end
