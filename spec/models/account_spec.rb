@@ -33,9 +33,18 @@ describe Account do
     it 'can have an active flag' do
       @account.should respond_to(:active)
     end
+
+    it 'should have an element' do
+      @account.should respond_to(:element)
+    end
+
+    it 'should only provide Asset, Liability, Equity, Revenue, and Expense in the list of elements' do
+      Account::ELEMENTS.should eql ['Asset', 'Liability', 'Equity', 'Revenue', 'Expense']
+    end
   end
   
-  describe 'validations' do
+  # validations
+  describe do
     before :each do
       @account = Account.generate
     end
@@ -72,6 +81,45 @@ describe Account do
       @account.should_not be_valid
       @account.should have_at_least(1).errors_on(:initial_balance)
       @account.errors.on(:initial_balance).should include("must be greater than or equal to 0")
+    end
+
+    it 'should have an element' do
+      @account.element = nil
+      @account.should_not be_valid
+      @account.should have_at_least(1).errors_on(:element)
+      @account.errors.on(:element).should include("can't be blank")
+    end
+
+    it 'should be valid with element Asset' do
+      @account.element = 'Asset'
+      @account.should be_valid
+    end
+
+    it 'should be valid with element Liability' do
+      @account.element = 'Liability'
+      @account.should be_valid
+    end
+
+    it 'should be valid with element Equity' do
+      @account.element = 'Equity'
+      @account.should be_valid
+    end
+
+    it 'should be valid with element Revenue' do
+      @account.element = 'Revenue'
+      @account.should be_valid
+    end
+
+    it 'should be valid with element Expense' do
+      @account.element = 'Expense'
+      @account.should be_valid
+    end
+
+    it 'should not be valid an element not one of Asset, Liability, Equity, Revenue, or Expense' do
+      @account.element = 'Invalid'
+      @account.should_not be_valid
+      @account.should have_at_least(1).errors_on(:element)
+      @account.errors.on(:element).should include("must be Asset, Liability, Equity, Revenue, or Expense")
     end
   end
 

@@ -1,3 +1,9 @@
+TODO 005 ADM031: Create Account Classification
+  AS AN     administrator
+  I WANT TO annotate an account as Asset, Liability, Equity, Revenue, or Expense
+  SO THAT   I can order the accounts by type to track incoming our outgoing
+            cashflow 
+
 TODO 010 FAM041: Create Transactions
   AS A family member
   I WANT TO enter transactions

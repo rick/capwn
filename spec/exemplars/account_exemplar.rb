@@ -4,4 +4,5 @@ class Account
   end
   generator_for :initial_balance, rand(99999)
   generator_for :active, true
+  generator_for :element, 'Asset'
 end
