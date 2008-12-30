@@ -23,6 +23,7 @@ class AccountsController < ApplicationController
       render :action => "new"
     end
   end
+
   def update
     self.resource = find_resource
     resource.attributes = params[resource_name]
@@ -36,6 +37,10 @@ class AccountsController < ApplicationController
 
   def inactive
     self.resources = resource_service.inactive
+  end
+
+  def journal
+    self.resource = find_resource
   end
 
   protected

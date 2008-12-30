@@ -139,3 +139,13 @@ describe AccountsController, 'administration' do
   end
 end
 
+describe AccountsController, 'handling GET /singular (journal)' do
+  it 'should assign the selected account' do
+    login_as User.generate
+    account = stub(:account, :id => 666)
+    Account.expects(:find).with("666").returns(account)
+    get :journal, :id => "666"
+    assigns[:account].should_not be_nil
+  end
+end
+
