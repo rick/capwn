@@ -41,6 +41,7 @@ class AccountsController < ApplicationController
 
   def journal
     self.resource = find_resource
+    @memos = @account.memos
   end
 
   protected
