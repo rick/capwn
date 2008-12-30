@@ -225,5 +225,50 @@ describe Account do
       end
     end
   end
+
+  describe 'memos' do
+    before :each do
+      @checking = Account.generate!(:name => 'checking', 
+                                    :element => 'Asset',
+                                    :initial_balance => 4000)
+      arent = Account.generate!(:name => 'rent', :element => 'Expense')
+      awate = Account.generate!(:name => 'water', :element => 'Expense')
+      asavi = Account.generate!(:name => 'saving', :element => 'Asset')
+
+      # Using explicit created_at to test order in which they are returned
+      mrent = Memo.generate!(:text => 'rent 01/09', 
+                             :created_at => Time.now + 1000)
+      mwate = Memo.generate!(:text => 'water bill 01/09', 
+                             :created_at => Time.now + 500)
+      msavi = Memo.generate!(:text => 'saving 01/09')
+
+      Entry.generate!(:memo => mrent,
+                      :amount => 800,
+                      :credit_account => arent,
+                      :debit_account => @checking) 
+      Entry.generate!(:memo => mwate,
+                      :amount => 50,
+                      :credit_account => awate,
+                      :debit_account => @checking) 
+      Entry.generate!(:memo => msavi,
+                      :amount => 1000,
+                      :credit_account => asavi,
+                      :debit_account => @checking) 
+      Entry.generate!(:memo => mrent,
+                      :amount => 800,
+                      :credit_account => arent,
+                      :debit_account => @checking) 
+    end
+
+    it 'should find unique memos related to this account' do
+      @checking.memos.length.should == 3
+    end
+
+    it 'should order memos by date descending' do
+      for i in (0...@checking.memos.length - 1)
+        @checking.memos[i].created_at.should > @checking.memos[i+1].created_at
+      end
+    end
+  end
 end
   

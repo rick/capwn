@@ -32,7 +32,9 @@ class Account < ActiveRecord::Base
   end
 
   def memos
-    Memo.find(:all, :conditions => ["id in (SELECT memo_id FROM Entries WHERE debit_account_id = ? OR credit_account_id = ?)", self.id, self.id])
+    Memo.find(:all, 
+              :conditions => ["id in (SELECT memo_id FROM Entries WHERE debit_account_id = ? OR credit_account_id = ?)", self.id, self.id],
+              :order => ["created_at DESC"])
   end
 
 
