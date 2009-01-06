@@ -30,6 +30,10 @@ describe Account do
       @account.should respond_to(:initial_balance)
     end
     
+    it 'can have a balance' do
+      @account.should respond_to(:balance)
+    end
+    
     it 'can have an active flag' do
       @account.should respond_to(:active)
     end

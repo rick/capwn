@@ -1,20 +1,27 @@
 class Account < ActiveRecord::Base
 
-  ELEMENTS = ['Asset', 'Liability', 'Equity', 'Revenue', 'Expense']
-
+  # Relations
   has_many :debit_entries, :class_name => "Entry", :foreign_key => "debit_account_id"
   has_many :credit_entries, :class_name => "Entry", :foreign_key => "credit_account_id"
 
+  # Name
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  # Initial Balance
   validates_presence_of :initial_balance
   validates_numericality_of :initial_balance, :greater_than_or_equal_to => 0.00
+
+  # Element 
+
+  ELEMENTS = ['Asset', 'Liability', 'Equity', 'Revenue', 'Expense']
 
   validates_presence_of :element
   validates_inclusion_of :element, :in => ELEMENTS,
     :message => "must be Asset, Liability, Equity, Revenue, or Expense"
   
+  # Finders
+
   named_scope :inactive,  :conditions => ['active = ?', false], :order => 'name'
   named_scope :assets, :conditions => ['element = ? AND active = ?', 'Asset', true], :order => 'name'
   named_scope :liabilities, :conditions => ['element = ? AND active = ?', 'Liability', true], :order => 'name'
