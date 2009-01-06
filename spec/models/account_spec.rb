@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Account do
   describe 'object' do
     before :each do
-      @account = Account.new
+      @account = Account.generate
     end
     
     it 'can have debit_entries' do
@@ -45,10 +45,22 @@ describe Account do
     it 'should only provide Asset, Liability, Equity, Revenue, and Expense in the list of elements' do
       Account::ELEMENTS.should eql(['Asset', 'Liability', 'Equity', 'Revenue', 'Expense'])
     end
+
+    it 'should update the balance to reflect the initial balance when created' do
+      @account.save
+      @account.balance.should == @account.initial_balance
+    end
+
+    it 'should not update the balance when changing the account' do
+      original_balance = @account.balance
+      @account.save
+      @account.initial_balance = 100
+      @account.save
+      @account.balance.should == original_balance
+    end
   end
   
-  # validations
-  describe do
+  describe 'validates' do
     before :each do
       @account = Account.generate
     end
@@ -127,7 +139,7 @@ describe Account do
     end
   end
 
-  describe 'finders' do
+  describe 'finder' do
     before :each do
       Account.generate(:name => 'active asset', :element => 'Asset', :active => true)
       Account.generate(:name => 'active asset 2', :element => 'Asset', :active => true)

@@ -1,5 +1,8 @@
 class Account < ActiveRecord::Base
 
+  # Callbacks
+  before_create :update_balance
+
   # Relations
   has_many :debit_entries, :class_name => "Entry", :foreign_key => "debit_account_id"
   has_many :credit_entries, :class_name => "Entry", :foreign_key => "credit_account_id"
@@ -42,6 +45,11 @@ class Account < ActiveRecord::Base
     Memo.find(:all, 
               :conditions => ["id in (SELECT memo_id FROM Entries WHERE debit_account_id = ? OR credit_account_id = ?)", self.id, self.id],
               :order => ["created_at DESC"])
+  end
+
+  private
+  def update_balance
+    self.balance = self.initial_balance
   end
 
 
