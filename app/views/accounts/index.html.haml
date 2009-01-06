@@ -3,9 +3,9 @@
 
 %table.account
   - for i in 0...@accounts.length
-    - if i % 2 == 0
+    - if i % 2 == 0 # This is a header
       %tr.element
-        %td.element{:span => "2"}
+        %td.element{:colspan => "2"}
           %h1.element= @accounts[i]
     - else
       - accounts = @accounts[i]
