@@ -11,5 +11,5 @@
       - accounts = @accounts[i]
       - accounts.each do |account|
         %tr.account
-          %td.name= account.name
+          %td.name= link_to account.name, journal_account_path(account.id)
           %td.balance= currencize(account.initial_balance)
