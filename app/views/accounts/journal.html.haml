@@ -1,3 +1,25 @@
 %h1= @account.name
 Last modified on: 
 = @account.updated_at.strftime("%m/%d/%Y at %I:%M%p")
+
+%table
+  %th
+    %tr
+      %td Date
+      %td Transaction
+      %td Account
+      %td Debit
+      %td Credit
+  - @memos.each do |memo|
+    %tr.memo
+      %td.memodate= memo.created_at.strftime("%m/%d/%Y")
+      %td.memotext{:colspan => "4"}= memo.text
+    - memo.entries.each do |entry|
+      - debit = entry.debit_account.name == @account.name ? true : false
+      %tr.entry
+        %td
+        %td.spacer
+        %td.account
+          = debit ? entry.debit_account.name : entry.credit_account.name
+        %td.entrydebit= entry.amount if debit
+        %td.entrycredit= entry.amount if not debit
