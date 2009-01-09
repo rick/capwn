@@ -33,5 +33,22 @@ describe Memo do
     end
     
   end
+
+  describe 'finders' do
+    before :each do
+      checking = Account.generate!(:name => "checking")
+      income = Account.generate!(:name => "income")
+      taxes = Account.generate!(:name => "taxes")
+      @memo = Memo.generate!(:user => User.generate!,
+                             :text => "paycheck")
+      Entry.generate!(:memo => @memo,
+                      :debit_account => income,
+                      :credit_account => checking,
+                      :amount => 500)
+      Entry.generate!(:memo => @memo,
+                      :debit_account => income,
+                      :credit_account => taxes,
+                      :amount => 500)
+    end
 end
   
